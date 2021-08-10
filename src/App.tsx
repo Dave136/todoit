@@ -1,12 +1,10 @@
-import React from 'react'
-import Task from './Task'
+import React from 'react';
+import Task from './Task';
 
-import './App.css'
+import './App.css';
 
 function App() {
-  return (
-    <Task />
-  )
+  return <Task />;
 }
 
-export default App
+export default App;
