@@ -4,27 +4,25 @@ import { v4 as uuid } from 'uuid';
 export type Task = {
   id: string;
   title: string;
-  description: string;
   done: boolean;
 };
 
 export type TaskState = {
   tasks: Task[];
-  addTask: (title: string, description?: string) => void;
+  addTask: (title: string) => void;
   removeTask: (id: string) => void;
   toggleComplete: (id: string) => void;
 };
 
 const useStore = create<TaskState>((set) => ({
   tasks: [],
-  addTask: (title: string, description?: string) =>
+  addTask: (title: string) =>
     set((state) => ({
       tasks: [
         ...state.tasks,
         {
           id: uuid(),
           title,
-          description,
           done: false,
         } as Task,
       ],

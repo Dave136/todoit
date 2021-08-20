@@ -1,7 +1,5 @@
 import React from 'react';
-import Task from './Task';
-
-import './App.css';
+import Task from './components/Task/Task';
 
 function App() {
   return <Task />;
