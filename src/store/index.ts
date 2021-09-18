@@ -1,5 +1,6 @@
 import create from 'zustand';
 import { v4 as uuid } from 'uuid';
+import storage from '../utils/storage';
 
 export type Task = {
   id: string;
@@ -16,34 +17,58 @@ export type TaskState = {
 };
 
 const useStore = create<TaskState>((set) => ({
-  tasks: [],
+  tasks: storage.getItem('tasks') || [],
   addTask: (title: string) =>
-    set((state) => ({
-      tasks: [
-        ...state.tasks,
-        {
-          id: uuid(),
-          title,
-          done: false,
-        } as Task,
-      ],
-    })),
+    set((state) => {
+      const updateState = {
+        tasks: [
+          ...state.tasks,
+          {
+            id: uuid(),
+            title,
+            done: false,
+          } as Task,
+        ],
+      };
+
+      storage.save('tasks', updateState.tasks);
+
+      return updateState;
+    }),
   updateTask: (id: string, title?: string) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === id ? { ...task, title: title || task.title } : task
-      ),
-    })),
+    set((state) => {
+      const updateState = {
+        tasks: state.tasks.map((task) =>
+          task.id === id ? { ...task, title: title || task.title } : task
+        ),
+      };
+
+      storage.save('tasks', updateState.tasks);
+
+      return updateState;
+    }),
   removeTask: (id: string) =>
-    set((state) => ({
-      tasks: state.tasks.filter((task) => task.id !== id),
-    })),
+    set((state) => {
+      const updateState = {
+        tasks: state.tasks.filter((task) => task.id !== id),
+      };
+
+      storage.save('tasks', updateState.tasks);
+
+      return updateState;
+    }),
   toggleComplete: (id) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === id ? ({ ...task, done: !task.done } as Task) : task
-      ),
-    })),
+    set((state) => {
+      const updateState = {
+        tasks: state.tasks.map((task) =>
+          task.id === id ? ({ ...task, done: !task.done } as Task) : task
+        ),
+      };
+
+      storage.save('tasks', updateState.tasks);
+
+      return updateState;
+    }),
 }));
 
 export default useStore;
