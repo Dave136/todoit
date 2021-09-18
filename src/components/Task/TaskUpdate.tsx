@@ -2,20 +2,24 @@ import React, { useState } from 'react';
 import useStore from '../../store';
 
 type Props = {
-  setIsCreating: Function;
+  task: {
+    id: string;
+    title: string;
+  };
+  setIsUpdating: Function;
 };
 
-export default function TaskCreate(props: Props) {
-  const [title, setTitle] = useState('');
-  const { addTask } = useStore();
+export default function TaskUpdate({ task, ...props }: Props) {
+  const [title, setTitle] = useState(task.title);
+  const { updateTask } = useStore();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTitle(e.currentTarget.value);
 
-  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    addTask(title);
+  const onClick = () => {
+    updateTask(task.id, title);
     setTitle('');
-    props.setIsCreating(false);
+    props.setIsUpdating(false);
   };
 
   return (
@@ -28,6 +32,7 @@ export default function TaskCreate(props: Props) {
               type="text"
               className="form-input bg-transparent text-white focus:outline-none focus:shadow-none"
               placeholder={`Tap "enter" to create subtasks`}
+              value={title}
               onChange={onChange}
             />
           </dd>
@@ -37,7 +42,7 @@ export default function TaskCreate(props: Props) {
           <dd className="flex justify-end items-end w-full">
             <button
               className="transition ease-out duration-500 text-white text-opacity-40 mr-2"
-              onClick={() => props.setIsCreating(false)}
+              onClick={() => props.setIsUpdating(false)}
             >
               cancel
             </button>
