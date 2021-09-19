@@ -33,7 +33,9 @@ export default function TaskListItem({ task, editTask }: Props): JSX.Element {
         </div>
         <div className="block w-full overflow-hidden">
           <dt className="sr-only">Title</dt>
-          <dd className="truncate text-white">
+          <dd
+            className={`truncate ${task.done ? 'text-gray-500' : 'text-white'}`}
+          >
             <span
               className={`leading-6 font-medium ${
                 task.done
