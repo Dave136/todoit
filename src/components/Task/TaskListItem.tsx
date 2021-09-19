@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoTrashBinOutline } from 'react-icons/io5';
+import { IoTrash } from 'react-icons/io5';
 
 import useStore from '../../store';
 import type { Task } from '../../store';
@@ -14,11 +14,11 @@ export default function TaskListItem({ task, editTask }: Props): JSX.Element {
 
   return (
     <li
-      className="bg-cool-gray-700 bg-opacity-30 border-transparent shadow-lg group rounded-lg block p-4 border"
+      className="bg-cool-gray-700 bg-opacity-30 border-transparent shadow-lg group rounded-lg block p-4 border w-full"
       onDoubleClick={() => editTask(task.id, task.title)}
     >
-      <dl className="flex">
-        <div>
+      <dl className="flex w-full">
+        <div className="">
           <dt className="sr-only">checkbox</dt>
           <dd className="mr-3">
             <input
@@ -31,9 +31,9 @@ export default function TaskListItem({ task, editTask }: Props): JSX.Element {
             />
           </dd>
         </div>
-        <div className="flex-grow">
+        <div className="block w-full overflow-hidden">
           <dt className="sr-only">Title</dt>
-          <dd>
+          <dd className="truncate text-white">
             <span
               className={`leading-6 font-medium ${
                 task.done
@@ -45,10 +45,10 @@ export default function TaskListItem({ task, editTask }: Props): JSX.Element {
             </span>
           </dd>
         </div>
-        <div className="self-center">
+        <div className="">
           <dt className="sr-only">Delete task</dt>
           <dd>
-            <IoTrashBinOutline
+            <IoTrash
               className="text-white text-opacity-30 cursor-pointer hover:text-red-500"
               size="1.2rem"
               onClick={() => removeTask(task.id)}
