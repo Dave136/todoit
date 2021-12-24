@@ -14,3 +14,69 @@ body {
 .checked {
   background-color: gray !important;
 }
+
+/* .el-enter {
+  opacity: 0.01;
+}
+
+.el-enter,
+.el-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.el-leave {
+  opacity: 1;
+}
+
+.el-leave,
+.el-leave-active {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+} */
+
+.el-enter {
+  opacity: 0.01;
+  transform: scale(1.1);
+}
+
+.el-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 300ms;
+}
+
+.el-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.el-exit-active {
+  opacity: 0.01;
+  transform: scale(1.1);
+  transition: all 300ms;
+}
+
+/* .el-appear,
+.el-enter {
+  opacity: 0;
+}
+
+.el-enter-done {
+  transform: rotate(720deg) scale(2);
+  opacity: 1;
+  transition: transform 1000ms, opacity 1000ms;
+  transition: all ease 1s;
+}
+
+.el-exit {
+  transform: rotate(720deg) scale(3);
+  opacity: 1;
+}
+
+.el-exit-active {
+  transform: rotate(0) scale(1);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+  transition: all ease 1s;
+} */

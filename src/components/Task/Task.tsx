@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IoCreateOutline } from 'react-icons/io5';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import useStore from '../../store';
 import TaskCreate from './TaskCreate';
@@ -27,32 +28,74 @@ export default function Task() {
 
   const completedTask = tasks.filter(({ done }) => done);
 
-  const completedTaskList = () =>
-    tasks.map(
-      (task) =>
-        task.done && (
-          <TaskListItem editTask={onEditTask} task={task} key={task.id} />
-        )
-    );
+  const completedTaskList = () => (
+    <TransitionGroup>
+      {tasks.map(
+        (task) =>
+          task.done && (
+            <CSSTransition
+              in={task.done}
+              classNames="el"
+              unmountOnExit
+              timeout={350}
+              appear
+              key={task.id}
+            >
+              <TaskListItem editTask={onEditTask} task={task} key={task.id} />
+            </CSSTransition>
+          )
+      )}
+    </TransitionGroup>
+  );
 
-  const uncompletedTaskList = () =>
-    tasks.map(
-      (task) =>
-        !task.done && (
-          <TaskListItem editTask={onEditTask} task={task} key={task.id} />
-        )
-    );
+  const uncompletedTaskList = () => (
+    <TransitionGroup>
+      {tasks.map(
+        (task) =>
+          !task.done && (
+            <CSSTransition
+              in={!task.done}
+              classNames="el"
+              unmountOnExit
+              timeout={350}
+              appear
+            >
+              <TaskListItem editTask={onEditTask} task={task} key={task.id} />
+            </CSSTransition>
+          )
+      )}
+    </TransitionGroup>
+  );
+
   return (
     <Wrapper>
       <Header title="TodoIt" />
       <TaskList>
         <>
-          {isCreating && <TaskCreate setIsCreating={setIsCreating} />}
+          {isCreating && (
+            <CSSTransition
+              in={isCreating}
+              classNames="el"
+              unmountOnExit
+              timeout={350}
+              appear
+            >
+              <TaskCreate setIsCreating={setIsCreating} />
+            </CSSTransition>
+          )}
           {isUpdating && (
-            <TaskUpdate
-              task={editingTask as EditTask}
-              setIsUpdating={setIsUpdating}
-            />
+            <CSSTransition
+              in={isUpdating}
+              classNames="el"
+              unmountOnExit
+              timeout={450}
+              appear
+            >
+              <TaskUpdate
+                task={editingTask as EditTask}
+                setIsUpdating={setIsUpdating}
+              />
+            </CSSTransition>
           )}
           {!tasks.length && !isCreating && (
             <div className="flex flex-col justify-center items-center mb-5">
