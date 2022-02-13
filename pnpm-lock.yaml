@@ -6,6 +6,7 @@ specifiers:
   '@types/uuid': ^8.3.4
   '@vitejs/plugin-react': ^1.0.7
   autoprefixer: ^10.4.2
+  gsap: ^3.9.1
   postcss: ^8.4.6
   react: ^17.0.2
   react-dom: ^17.0.2
@@ -16,6 +17,7 @@ specifiers:
   zustand: ^3.7.0
 
 dependencies:
+  gsap: 3.9.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   uuid: 8.3.2
@@ -891,6 +893,10 @@ packages:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
     engines: {node: '>=4'}
     dev: true
+
+  /gsap/3.9.1:
+    resolution: {integrity: sha512-JSGVYoC6da4pIjdF/yxFU6Rz8OojOIDkbooveZlfNg0+JIoFoRruyfWAEi6R/gUeNcuOiTqUIb0gi1nCNrHf8w==}
+    dev: false
 
   /has-flag/3.0.0:
     resolution: {integrity: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=}
