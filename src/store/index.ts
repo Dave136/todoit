@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { v4 as uuid } from 'uuid';
-import storage from '../utils/storage';
+import storage from '../utils/localStorage';
 
 export type Task = {
   id: string;
